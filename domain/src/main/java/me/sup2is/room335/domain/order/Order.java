@@ -1,11 +1,11 @@
-package me.sup2is.room335.order;
+package me.sup2is.room335.domain.order;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.sup2is.room335.BaseEntity;
-import me.sup2is.room335.model.Money;
+import me.sup2is.room335.domain.BaseEntity;
+import me.sup2is.room335.domain.model.Money;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

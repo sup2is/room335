@@ -1,4 +1,4 @@
-package me.sup2is.room335.member;
+package me.sup2is.room335.domain.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

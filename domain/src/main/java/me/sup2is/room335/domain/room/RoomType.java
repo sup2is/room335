@@ -1,4 +1,4 @@
-package me.sup2is.room335.room;
+package me.sup2is.room335.domain.room;
 
 public enum RoomType {
 

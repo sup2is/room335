@@ -1,10 +1,10 @@
-package me.sup2is.room335.room;
+package me.sup2is.room335.domain.room;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.sup2is.room335.BaseEntity;
+import me.sup2is.room335.domain.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

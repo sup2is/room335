@@ -1,4 +1,4 @@
-package me.sup2is.room335.order;
+package me.sup2is.room335.domain.order;
 
 public enum OrderStateType {
 

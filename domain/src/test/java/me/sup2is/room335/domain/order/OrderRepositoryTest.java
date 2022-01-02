@@ -1,7 +1,7 @@
-package me.sup2is.room335.order;
+package me.sup2is.room335.domain.order;
 
 import lombok.RequiredArgsConstructor;
-import me.sup2is.room335.model.Money;
+import me.sup2is.room335.domain.model.Money;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestConstructor;
@@ -9,7 +9,6 @@ import org.springframework.test.context.TestConstructor;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)

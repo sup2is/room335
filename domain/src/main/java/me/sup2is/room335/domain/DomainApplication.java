@@ -1,4 +1,4 @@
-package me.sup2is.room335;
+package me.sup2is.room335.domain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
