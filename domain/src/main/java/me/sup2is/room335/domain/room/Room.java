@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.sup2is.room335.domain.BaseEntity;
+import me.sup2is.room335.domain.model.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

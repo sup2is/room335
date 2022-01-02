@@ -1,4 +1,4 @@
-package me.sup2is.room335.domain;
+package me.sup2is.room335.domain.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
