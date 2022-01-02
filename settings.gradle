@@ -1,0 +1,5 @@
+rootProject.name = 'room335'
+include 'core'
+include 'domain'
+include 'api'
+
