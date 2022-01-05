@@ -18,13 +18,13 @@ public class RoomImage extends BaseEntity {
     private Room room;
     private String roomImageUrl;
     private Boolean isMain;
-    private Integer order;
+    private Integer orders;
 
     @Builder
-    private RoomImage(final String roomImageUrl, final Boolean isMain, final Integer order) {
+    private RoomImage(final String roomImageUrl, final Boolean isMain, final Integer orders) {
         this.roomImageUrl = roomImageUrl;
         this.isMain = isMain;
-        this.order = order;
+        this.orders = orders;
     }
 
     public void setRoom(Room room) {
