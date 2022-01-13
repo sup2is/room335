@@ -1,23 +1,56 @@
 plugins {
     id 'java'
+    id 'org.asciidoctor.jvm.convert' version '3.3.0'
 }
-
 group 'me.sup2is.room335'
 version '1.0-SNAPSHOT'
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
 
 repositories {
     mavenCentral()
 }
 
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
+}
+
 dependencies {
+    implementation(project(":domain"))
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation(project(":domain"))
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 test {
     useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs")
+}
+
+build {
+    dependsOn copyDocument
 }
 
 jar.enabled = false
-bootJar.enabled = true
