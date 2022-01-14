@@ -1,6 +1,8 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+BOOT-INF/
+static/
 
 ### STS ###
 .apt_generated
