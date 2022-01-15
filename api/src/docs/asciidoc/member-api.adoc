@@ -1,0 +1,21 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== REQUEST
+
+include::{snippets}/member/create/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/member/create/http-response.adoc[]
+
+
+== REQUEST
+
+include::{snippets}/member/get/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/member/get/http-response.adoc[]
+
