@@ -5,5 +5,5 @@ public abstract class EndPoints {
     public static final String MEMBER_ROOT = "/members";
     public static final String MEMBER_GET = MEMBER_ROOT + "/{memberId}";
 
-
+    public static final String ROOM_ROOT = "/rooms";
 }

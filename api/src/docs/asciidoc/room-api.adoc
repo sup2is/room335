@@ -1,0 +1,11 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== REQUEST
+
+include::{snippets}/room/create/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/room/create/http-response.adoc[]
