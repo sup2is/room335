@@ -47,4 +47,23 @@ class RoomRepositoryTest {
         assertThat(room).isEqualTo(findRoom);
     }
 
+    @Test
+    void roomNumber로_객실_조회() {
+        //given
+        Room room = Room.builder()
+                .roomNumber("roomNumber")
+                .roomType(RoomType.SINGLE_BED_ROOM)
+                .roomName("roomName")
+                .roomFloor(1)
+                .build();
+
+        roomRepository.save(room);
+
+        //when
+        Room findRoom = roomRepository.findByRoomNumber(room.getRoomNumber()).get();
+
+        //then
+        assertThat(room).isEqualTo(findRoom);
+    }
+
 }
