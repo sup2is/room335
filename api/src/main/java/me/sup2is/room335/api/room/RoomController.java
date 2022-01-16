@@ -14,7 +14,7 @@ public class RoomController {
 
     @PostMapping(EndPoints.ROOM_ROOT)
     public void createRoom(RoomCreateDto.Request request) {
-
+        roomService.createRoom(request);
     }
 
 }
