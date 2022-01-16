@@ -1,19 +1,25 @@
 package me.sup2is.room335.api.room;
 
-import lombok.RequiredArgsConstructor;
-import me.sup2is.room335.api.config.AbstractServiceTestConfig;
 import me.sup2is.room335.api.room.dto.RoomCreateDto;
+import me.sup2is.room335.domain.room.RoomRepository;
 import me.sup2is.room335.domain.room.RoomType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
 
-@RequiredArgsConstructor
-class RoomServiceTest extends AbstractServiceTestConfig {
+@ExtendWith(MockitoExtension.class)
+class RoomServiceTest {
 
-    final RoomService roomService;
+    @InjectMocks
+    RoomService roomService;
+
+    @Mock
+    RoomRepository roomRepository;
 
     @Test
     void 객실_생성() {

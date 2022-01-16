@@ -1,11 +1,14 @@
 package me.sup2is.room335.api.member;
 
-import lombok.RequiredArgsConstructor;
-import me.sup2is.room335.api.config.AbstractServiceTestConfig;
 import me.sup2is.room335.api.member.dto.MemberCreateDto;
 import me.sup2is.room335.api.member.dto.MemberDto;
 import me.sup2is.room335.domain.member.Member;
+import me.sup2is.room335.domain.member.MemberRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
@@ -15,10 +18,14 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
-@RequiredArgsConstructor
-class MemberServiceTest extends AbstractServiceTestConfig {
+@ExtendWith(MockitoExtension.class)
+class MemberServiceTest {
 
-    final MemberService memberService;
+    @InjectMocks
+    MemberService memberService;
+
+    @Mock
+    MemberRepository memberRepository;
 
     @Test
     void 멤버_생성() {
