@@ -35,7 +35,8 @@ public class Room extends BaseEntity {
                  final String roomNumber,
                  final Integer roomFloor,
                  final RoomType roomType,
-                 final String description) {
+                 final String description,
+                 final List<String> roomImages) {
         this.roomName = roomName;
         this.roomNumber = roomNumber;
         this.roomFloor = roomFloor;
