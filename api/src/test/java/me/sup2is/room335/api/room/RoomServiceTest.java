@@ -2,6 +2,7 @@ package me.sup2is.room335.api.room;
 
 import me.sup2is.room335.api.room.dto.RoomCreateDto;
 import me.sup2is.room335.api.room.dto.RoomDto;
+import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.Room;
 import me.sup2is.room335.domain.room.RoomRepository;
 import me.sup2is.room335.domain.room.RoomType;
@@ -29,6 +30,9 @@ class RoomServiceTest {
     @Mock
     RoomRepository roomRepository;
 
+    @Mock
+    RoomValidator roomValidator;
+
     @Test
     void 객실_생성() {
         //given
@@ -37,6 +41,7 @@ class RoomServiceTest {
                 .roomName("roomName")
                 .roomNumber("roomNumber")
                 .roomType(RoomType.SINGLE_BED_ROOM)
+                .price(Money.wons(1000))
                 .build();
 
         //when
@@ -44,6 +49,7 @@ class RoomServiceTest {
 
         //then
         then(roomRepository).should().save(any());
+        then(roomValidator).should().checkUniqueRoom(any());
     }
 
     @Test

@@ -3,6 +3,7 @@ package me.sup2is.room335.api.room.dto;
 import lombok.Builder;
 import lombok.Getter;
 import me.sup2is.room335.domain.member.Member;
+import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.Room;
 import me.sup2is.room335.domain.room.RoomType;
 
@@ -19,6 +20,7 @@ public class RoomCreateDto {
         private String roomNumber;
         private Integer roomFloor;
         private RoomType roomType;
+        private Money price;
 
         public Room toEntity() {
             return Room.builder()
@@ -26,6 +28,7 @@ public class RoomCreateDto {
                     .roomName(roomName)
                     .roomNumber(roomNumber)
                     .roomType(roomType)
+                    .price(price)
                     .build();
         }
     }
