@@ -11,7 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
@@ -20,7 +22,7 @@ import java.time.LocalDate;
 public class Order extends BaseEntity {
 
     private Long roomId;
-    private Long userId;
+    private Long memberId;
 
     @Enumerated(EnumType.STRING)
     private OrderStateType orderStateType;
@@ -30,13 +32,26 @@ public class Order extends BaseEntity {
     private Money totalPrice;
 
     @Builder
-    private Order(final Long roomId, final Long userId, final LocalDate fromDate, final LocalDate toDate, final Money totalPrice) {
+    private Order(final Long roomId, final Long memberId, final LocalDate fromDate, final LocalDate toDate, final Money totalPrice) {
         this.roomId = roomId;
-        this.userId = userId;
+        this.memberId = memberId;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.totalPrice = totalPrice;
 
         this.orderStateType = OrderStateType.PREPARED;
+    }
+
+    public void calculateTotalPrice(final Money roomPrice) {
+
+        long days = ChronoUnit.DAYS.between(fromDate, toDate);
+        BigDecimal price = BigDecimal.valueOf(0);
+
+        for (int i = 0; i < days; i++) {
+//            price.pl(roomPrice.getValue());
+        }
+
+        totalPrice = Money.wons(price.intValue());
+
     }
 }
