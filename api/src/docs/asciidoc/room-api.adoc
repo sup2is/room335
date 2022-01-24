@@ -9,3 +9,11 @@ include::{snippets}/room/create/http-request.adoc[]
 == RESPONSE
 
 include::{snippets}/room/create/http-response.adoc[]
+
+== REQUEST
+
+include::{snippets}/room/get/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/room/get/http-response.adoc[]
