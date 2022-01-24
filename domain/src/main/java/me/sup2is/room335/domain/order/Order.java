@@ -45,13 +45,8 @@ public class Order extends BaseEntity {
     public void calculateTotalPrice(final Money roomPrice) {
 
         long days = ChronoUnit.DAYS.between(fromDate, toDate);
-        BigDecimal price = BigDecimal.valueOf(0);
 
-        for (int i = 0; i < days; i++) {
-//            price.pl(roomPrice.getValue());
-        }
-
-        totalPrice = Money.wons(price.intValue());
+        totalPrice = Money.wons(roomPrice.getValue().multiply(new BigDecimal(days)).longValue());
 
     }
 }

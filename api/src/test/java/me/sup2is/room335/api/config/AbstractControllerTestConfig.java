@@ -2,6 +2,7 @@ package me.sup2is.room335.api.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.sup2is.room335.api.member.MemberService;
+import me.sup2is.room335.api.order.OrderService;
 import me.sup2is.room335.api.room.RoomService;
 import me.sup2is.room335.domain.room.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class AbstractControllerTestConfig {
     @MockBean
     protected RoomService roomService;
 
+    @MockBean
+    protected OrderService orderService;
 
 
 }

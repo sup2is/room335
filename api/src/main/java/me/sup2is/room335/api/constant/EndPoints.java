@@ -7,4 +7,7 @@ public abstract class EndPoints {
 
     public static final String ROOM_ROOT = "/rooms";
     public static final String ROOM_GET = "/rooms/{roomId}";
+
+    public static final String ORDER_ROOT = "/orders";
+
 }

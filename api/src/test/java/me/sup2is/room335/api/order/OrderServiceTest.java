@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -38,6 +39,9 @@ class OrderServiceTest {
     @Mock
     MemberRepository memberRepository;
 
+    @Mock
+    OrderValidator orderValidator;
+
     @Test
     void 주문_생성() {
         //given
@@ -46,7 +50,7 @@ class OrderServiceTest {
         OrderCreateDto.Request request = OrderCreateDto.Request
                 .builder()
                 .fromDate(LocalDate.of(2022,1,1))
-                .toDate(LocalDate.of(2022,1,2))
+                .toDate(LocalDate.of(2022,1,3))
                 .roomId(roomId)
                 .memberId(memberId)
                 .build();
@@ -61,9 +65,11 @@ class OrderServiceTest {
                 .willReturn(Optional.of(Member.builder().build()));
 
         //when
-        orderService.createOrder(request);
+        Order order = orderService.createOrder(request);
 
         //then
+        assertThat(order.getTotalPrice()).isEqualTo(Money.wons(200));
+
         then(orderRepository).should().save(any(Order.class));
     }
 

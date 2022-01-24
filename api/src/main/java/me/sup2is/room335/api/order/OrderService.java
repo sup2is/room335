@@ -18,8 +18,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
+    private final OrderValidator orderValidator;
 
     public Order createOrder(OrderCreateDto.Request request) {
+
+        Order order = request.toEntity();
+
+        orderValidator.checkValidOrder(order);
 
         Room room = roomRepository.findById(request.getRoomId()).orElseThrow(
                 () -> new IllegalArgumentException()
@@ -28,8 +33,6 @@ public class OrderService {
         memberRepository.findById(request.getMemberId()).orElseThrow(
                 () -> new IllegalArgumentException()
         );
-
-        Order order = request.toEntity();
 
         order.calculateTotalPrice(room.getPrice());
 
