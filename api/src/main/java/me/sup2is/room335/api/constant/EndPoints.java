@@ -9,5 +9,6 @@ public abstract class EndPoints {
     public static final String ROOM_GET = "/rooms/{roomId}";
 
     public static final String ORDER_ROOT = "/orders";
+    public static final String ORDER_GET = "/orders/{orderId}";
 
 }

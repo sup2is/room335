@@ -1,6 +1,7 @@
 package me.sup2is.room335.api.order;
 
 import me.sup2is.room335.api.order.dto.OrderCreateDto;
+import me.sup2is.room335.api.order.dto.OrderDto;
 import me.sup2is.room335.domain.member.Member;
 import me.sup2is.room335.domain.member.MemberRepository;
 import me.sup2is.room335.domain.model.Money;
@@ -71,6 +72,33 @@ class OrderServiceTest {
         assertThat(order.getTotalPrice()).isEqualTo(Money.wons(200));
 
         then(orderRepository).should().save(any(Order.class));
+    }
+
+    @Test
+    void 주문_조회() {
+        //given
+        long orderId = 1L;
+        Order order = Order.builder()
+                .memberId(1L)
+                .roomId(2L)
+                .fromDate(LocalDate.of(2022, 1, 3))
+                .toDate(LocalDate.of(2022, 1, 5))
+                .totalPrice(Money.wons(1000))
+                .build();
+
+        given(orderRepository.findById(orderId))
+                .willReturn(Optional.of(order));
+
+        //when
+        OrderDto.Response response = orderService.getOrder(orderId);
+
+        //then
+        assertThat(response.getFromDate()).isEqualTo(order.getFromDate());
+        assertThat(response.getToDate()).isEqualTo(order.getToDate());
+        assertThat(response.getMemberId()).isEqualTo(order.getMemberId());
+        assertThat(response.getRoomId()).isEqualTo(order.getRoomId());
+        assertThat(response.getOrderStateType()).isEqualTo(order.getOrderStateType());
+        assertThat(response.getTotalPrice()).isEqualTo(order.getTotalPrice());
     }
 
 }

@@ -9,3 +9,11 @@ include::{snippets}/order/create/http-request.adoc[]
 == RESPONSE
 
 include::{snippets}/order/create/http-response.adoc[]
+
+== REQUEST
+
+include::{snippets}/order/get/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/order/get/http-response.adoc[]
