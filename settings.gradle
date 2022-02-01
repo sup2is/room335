@@ -2,4 +2,7 @@ rootProject.name = 'room335'
 include 'core'
 include 'domain'
 include 'api'
+include 'client'
+include 'client:kafka'
+findProject(':client:kafka')?.name = 'kafka'
 
