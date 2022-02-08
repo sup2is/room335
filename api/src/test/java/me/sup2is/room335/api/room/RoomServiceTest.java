@@ -33,10 +33,13 @@ class RoomServiceTest {
     @Mock
     RoomValidator roomValidator;
 
+    @Mock
+    RoomCreationEventPublisher roomCreationEventPublisher;
+
     @Test
     void 객실_생성() {
         //given
-        RoomCreateDto.Request build = RoomCreateDto.Request.builder()
+        RoomCreateDto.Request request = RoomCreateDto.Request.builder()
                 .roomFloor(1)
                 .roomName("roomName")
                 .roomNumber("roomNumber")
@@ -45,11 +48,12 @@ class RoomServiceTest {
                 .build();
 
         //when
-        roomService.createRoom(build);
+        roomService.createRoom(request);
 
         //then
         then(roomRepository).should().save(any());
         then(roomValidator).should().checkUniqueRoom(any());
+        then(roomCreationEventPublisher).should().publishRoomCreationEvent(null, request);
     }
 
     @Test

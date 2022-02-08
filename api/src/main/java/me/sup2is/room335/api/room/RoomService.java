@@ -17,6 +17,8 @@ public class RoomService {
 
     private final RoomValidator roomValidator;
 
+    private final RoomCreationEventPublisher roomCreationEventPublisher;
+
     @Transactional
     public void createRoom(final RoomCreateDto.Request request) {
         Room room = request.toEntity();
@@ -24,6 +26,8 @@ public class RoomService {
         roomValidator.checkUniqueRoom(room);
 
         roomRepository.save(room);
+
+        roomCreationEventPublisher.publishRoomCreationEvent(room.getId(), request);
     }
 
     public RoomDto.Response getRoom(final Long roomId) {
