@@ -18,7 +18,7 @@ public class TestConsumer {
     private String payload = null;
 
     @KafkaListener(
-            topics = "${kafka.testTopicName}",
+            topics = "${topic.test-topic-name}",
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public void receive(ConsumerRecord<?, ?> consumerRecord) {

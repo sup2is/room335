@@ -27,7 +27,7 @@ class KafkaPubSubTest {
     final KafkaTemplate<String, String> kafkaTemplate;
     final TestConsumer consumer;
 
-    @Value(value = "${kafka.testTopicName}")
+    @Value(value = "${topic.test-topic-name}")
     String testTopicName;
 
     @Test

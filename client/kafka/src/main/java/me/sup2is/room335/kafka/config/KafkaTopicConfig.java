@@ -1,5 +1,6 @@
 package me.sup2is.room335.kafka.config;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,24 +12,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@RequiredArgsConstructor
 public class KafkaTopicConfig {
 
-    @Value(value = "${kafka.bootstrapAddress}")
-    private String bootstrapAddress;
-
-    @Value(value = "${kafka.testTopicName}")
-    private String testTopicName;
+    private final KafkaConfigProperties kafkaConfigProperties;
+    private final KafkaTopicProperties kafkaTopicProperties;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigProperties.getBootstrapServers());
         return new KafkaAdmin(configs);
     }
 
     @Bean
     public NewTopic testTopic() {
-        return new NewTopic(testTopicName, 1, (short) 1);
+        return new NewTopic(kafkaTopicProperties.getTestTopicName(), 1, (short) 1);
     }
 
 }
