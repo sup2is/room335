@@ -1,6 +1,7 @@
 package me.sup2is.room335.kafka;
 
 import lombok.RequiredArgsConstructor;
+import me.sup2is.room335.kafka.config.KafkaTopicProperties;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,7 @@ class KafkaPubSubTest {
 
     final KafkaTemplate<String, String> kafkaTemplate;
     final TestConsumer consumer;
-
-    @Value(value = "${topic.test-topic-name}")
-    String testTopicName;
+    final KafkaTopicProperties kafkaTopicProperties;
 
     @Test
     void 이벤트_발행_소비() throws InterruptedException {
@@ -36,7 +35,7 @@ class KafkaPubSubTest {
         String message = "test-message-" + System.currentTimeMillis();
 
         //when
-        kafkaTemplate.send(testTopicName, message);
+        kafkaTemplate.send(kafkaTopicProperties.getTestTopicName(), message);
 
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
