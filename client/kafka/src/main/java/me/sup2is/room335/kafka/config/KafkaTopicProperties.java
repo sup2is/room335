@@ -14,5 +14,5 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaTopicProperties {
 
     private final String testTopicName;
-
+    private final String roomCreation;
 }

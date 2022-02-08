@@ -8,3 +8,5 @@ spring:
 
 topic:
   test-topic-name: 'test-topic'
+  room-creation: 'room-creation'
+

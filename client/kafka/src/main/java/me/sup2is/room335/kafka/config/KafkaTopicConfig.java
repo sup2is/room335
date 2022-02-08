@@ -30,4 +30,9 @@ public class KafkaTopicConfig {
         return new NewTopic(kafkaTopicProperties.getTestTopicName(), 1, (short) 1);
     }
 
+    @Bean
+    public NewTopic roomCreation() {
+        return new NewTopic(kafkaTopicProperties.getRoomCreation(), 1, (short) 1);
+    }
+
 }
