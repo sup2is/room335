@@ -23,7 +23,8 @@ public class RoomCreationEventPublisher {
                         .roomNumber(request.getRoomNumber())
                         .roomFloor(request.getRoomFloor())
                         .roomName(request.getRoomName())
-                        .price(request.getPrice().getValue())
+                        .roomType(request.getRoomType())
+                        .price(request.getPrice())
                         .roomId(roomId)
                         .build()
         );
