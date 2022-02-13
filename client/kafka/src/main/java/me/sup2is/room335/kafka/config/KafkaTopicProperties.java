@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
-import org.springframework.context.annotation.Configuration;
 
 @Getter
 @ConfigurationProperties(prefix = "topic")
@@ -13,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ConstructorBinding
 public class KafkaTopicProperties {
 
-    private final String testTopicName;
+    private final String testStringTopic;
+    private final String testMessageTopic;
     private final String roomCreation;
 }

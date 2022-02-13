@@ -9,6 +9,7 @@ spring:
       ack-mode: manual_immediate
 
 topic:
-  test-topic-name: 'test-topic'
+  test-string-topic: 'test-topic'
+  test-message-topic: 'test-message-topic'
   room-creation: 'room-creation'
 

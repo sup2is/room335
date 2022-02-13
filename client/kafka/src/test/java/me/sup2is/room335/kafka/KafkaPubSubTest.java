@@ -33,7 +33,7 @@ class KafkaPubSubTest {
         String message = "test-message-" + System.currentTimeMillis();
 
         //when
-        kafkaTemplate.send(kafkaTopicProperties.getTestTopicName(), message);
+        kafkaTemplate.send(kafkaTopicProperties.getTestStringTopic(), message);
 
         stringMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
@@ -48,7 +48,7 @@ class KafkaPubSubTest {
         TestMessage sampleMessage = TestMessage.createSampleMessage();
 
         //when
-        kafkaTemplate.send(kafkaTopicProperties.getRoomCreation(), sampleMessage);
+        kafkaTemplate.send(kafkaTopicProperties.getTestMessageTopic(), sampleMessage);
 
         testMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 

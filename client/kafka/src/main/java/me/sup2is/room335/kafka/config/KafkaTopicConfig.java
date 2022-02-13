@@ -26,8 +26,13 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public NewTopic testTopic() {
-        return new NewTopic(kafkaTopicProperties.getTestTopicName(), 1, (short) 1);
+    public NewTopic testStringTopic() {
+        return new NewTopic(kafkaTopicProperties.getTestStringTopic(), 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic testMessageTopic() {
+        return new NewTopic(kafkaTopicProperties.getTestMessageTopic(), 1, (short) 1);
     }
 
     @Bean
