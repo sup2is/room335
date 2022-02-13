@@ -5,6 +5,8 @@ spring:
     consumer:
       auto-offset-reset: earliest
       group-id: room335
+    listener:
+      ack-mode: manual_immediate
 
 topic:
   test-topic-name: 'test-topic'
