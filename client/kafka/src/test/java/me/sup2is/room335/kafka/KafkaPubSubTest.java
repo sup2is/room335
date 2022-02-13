@@ -1,20 +1,16 @@
 package me.sup2is.room335.kafka;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import me.sup2is.room335.core.ObjectMapperFactory;
 import me.sup2is.room335.kafka.config.KafkaTopicProperties;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.test.context.TestConstructor;
-import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,26 +18,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @RequiredArgsConstructor
-@Import(TestConsumer.class)
+@Import({TestTopicMessageConsumer.class, RoomCreationMessageConsumer.class})
 class KafkaPubSubTest {
 
-    final KafkaTemplate<String, String> kafkaTemplate;
-    final TestConsumer consumer;
+    final KafkaTemplate<String, Object> kafkaTemplate;
+    final TestTopicMessageConsumer testTopicMessageConsumer;
+    final RoomCreationMessageConsumer roomCreationMessageConsumer;
     final KafkaTopicProperties kafkaTopicProperties;
+    final ObjectMapper objectMapper = ObjectMapperFactory.newDefault();
 
     @Test
-    void 이벤트_발행_소비() throws InterruptedException {
+    void 문자열_이벤트_발행_소비() throws InterruptedException {
         //given
         String message = "test-message-" + System.currentTimeMillis();
 
         //when
         kafkaTemplate.send(kafkaTopicProperties.getTestTopicName(), message);
 
-        consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        testTopicMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         //then
-        assertThat(consumer.getLatch().getCount()).isEqualTo(0L);
-        assertThat(consumer.getPayload()).contains(message);
+        assertThat(testTopicMessageConsumer.getLatch().getCount()).isEqualTo(0L);
+        assertThat(testTopicMessageConsumer.getPayload().toString()).contains(message);
+    }
+
+    @Test
+    void 객체_이벤트_발행_소비() throws InterruptedException, IOException {
+        //given
+        TestMessage sampleMessage = TestMessage.createSampleMessage();
+
+        //when
+        kafkaTemplate.send(kafkaTopicProperties.getRoomCreation(), sampleMessage);
+
+        roomCreationMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+
+        //then
+        assertThat(roomCreationMessageConsumer.getLatch().getCount()).isEqualTo(0L);
+        TestMessage receivedMessage = objectMapper.readValue(roomCreationMessageConsumer.getPayload().toString(), TestMessage.class);
+        assertThat(receivedMessage).isEqualTo(sampleMessage);
     }
 
 }
