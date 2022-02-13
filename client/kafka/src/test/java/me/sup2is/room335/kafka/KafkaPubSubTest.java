@@ -18,12 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @RequiredArgsConstructor
-@Import({TestTopicMessageConsumer.class, RoomCreationMessageConsumer.class})
+@Import({StringMessageConsumer.class, TestMessageConsumer.class})
 class KafkaPubSubTest {
 
     final KafkaTemplate<String, Object> kafkaTemplate;
-    final TestTopicMessageConsumer testTopicMessageConsumer;
-    final RoomCreationMessageConsumer roomCreationMessageConsumer;
+    final StringMessageConsumer stringMessageConsumer;
+    final TestMessageConsumer testMessageConsumer;
     final KafkaTopicProperties kafkaTopicProperties;
     final ObjectMapper objectMapper = ObjectMapperFactory.newDefault();
 
@@ -35,11 +35,11 @@ class KafkaPubSubTest {
         //when
         kafkaTemplate.send(kafkaTopicProperties.getTestTopicName(), message);
 
-        testTopicMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        stringMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         //then
-        assertThat(testTopicMessageConsumer.getLatch().getCount()).isEqualTo(0L);
-        assertThat(testTopicMessageConsumer.getPayload().toString()).contains(message);
+        assertThat(stringMessageConsumer.getLatch().getCount()).isEqualTo(0L);
+        assertThat(stringMessageConsumer.getPayload().toString()).contains(message);
     }
 
     @Test
@@ -50,11 +50,11 @@ class KafkaPubSubTest {
         //when
         kafkaTemplate.send(kafkaTopicProperties.getRoomCreation(), sampleMessage);
 
-        roomCreationMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        testMessageConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         //then
-        assertThat(roomCreationMessageConsumer.getLatch().getCount()).isEqualTo(0L);
-        TestMessage receivedMessage = objectMapper.readValue(roomCreationMessageConsumer.getPayload().toString(), TestMessage.class);
+        assertThat(testMessageConsumer.getLatch().getCount()).isEqualTo(0L);
+        TestMessage receivedMessage = objectMapper.readValue(testMessageConsumer.getPayload().toString(), TestMessage.class);
         assertThat(receivedMessage).isEqualTo(sampleMessage);
     }
 

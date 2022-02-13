@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 @Slf4j
 @Getter
 @Component
-public class TestTopicMessageConsumer {
+public class StringMessageConsumer {
 
     private CountDownLatch latch = new CountDownLatch(1);
     private Object payload = null;

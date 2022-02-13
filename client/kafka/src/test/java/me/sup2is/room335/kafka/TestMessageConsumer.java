@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 @Slf4j
 @Getter
 @Component
-public class RoomCreationMessageConsumer {
+public class TestMessageConsumer {
 
     private CountDownLatch latch = new CountDownLatch(1);
     private Object payload = null;
