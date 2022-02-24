@@ -1,7 +1,9 @@
 package me.sup2is.room335.api.room.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import me.sup2is.room335.domain.member.Member;
 import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.Room;
@@ -14,6 +16,8 @@ public class RoomCreateDto {
 
     @Builder
     @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Request {
 
         private String roomName;

@@ -1,10 +1,9 @@
 package me.sup2is.room335.api.room;
 
 import lombok.RequiredArgsConstructor;
+import me.sup2is.room335.api.config.KafkaTopicProperties;
 import me.sup2is.room335.api.room.dto.RoomCreateDto;
 import me.sup2is.room335.api.room.dto.RoomCreationMessage;
-import me.sup2is.room335.kafka.config.KafkaProducerConfig;
-import me.sup2is.room335.kafka.config.KafkaTopicProperties;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
