@@ -22,7 +22,7 @@ class OrderRepositoryTest {
         //given
         Order order = Order.builder()
                 .roomId(1L)
-                .userId(1L)
+                .memberId(1L)
                 .fromDate(LocalDate.of(2022, 1, 1))
                 .toDate(LocalDate.of(2022, 1, 2))
                 .totalPrice(Money.ZERO)
