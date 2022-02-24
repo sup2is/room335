@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/room335
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://127.0.0.1:3307/room335?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
     hibernate:
       ddl-auto: update
