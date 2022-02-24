@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @ConfigurationPropertiesScan
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "me.sup2is.room335")
 public class KafkaApplication {
 
     public static void main(String[] args) {
