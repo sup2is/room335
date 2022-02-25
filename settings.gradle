@@ -8,4 +8,6 @@ findProject(':client:kafka')?.name = 'kafka'
 include 'worker'
 include 'worker:room-creation'
 findProject(':worker:room-creation')?.name = 'room-creation'
+include 'client:redis'
+findProject(':client:redis')?.name = 'redis'
 
