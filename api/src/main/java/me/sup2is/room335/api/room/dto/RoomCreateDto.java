@@ -4,13 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.sup2is.room335.domain.member.Member;
 import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.Room;
 import me.sup2is.room335.domain.room.RoomType;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 public class RoomCreateDto {
 
@@ -28,11 +24,11 @@ public class RoomCreateDto {
 
         public Room toEntity() {
             return Room.builder()
-                    .roomFloor(roomFloor)
-                    .roomName(roomName)
-                    .roomNumber(roomNumber)
-                    .roomType(roomType)
-                    .price(price)
+                    .roomFloor(this.roomFloor)
+                    .roomName(this.roomName)
+                    .roomNumber(this.roomNumber)
+                    .roomType(this.roomType)
+                    .price(this.price)
                     .build();
         }
     }

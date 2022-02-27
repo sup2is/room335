@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,21 +26,21 @@ class RoomValidatorTest {
     @Test
     void 같은_room_number가_있을_경우_IllegalArgumentException() {
         //given
-        String newRoomNumber = "newRoomNumber";
-        Room room = Room.builder()
+        final String newRoomNumber = "newRoomNumber";
+        final Room room = Room.builder()
                 .roomNumber(newRoomNumber)
                 .roomType(RoomType.SINGLE_BED_ROOM)
                 .roomName("")
                 .roomFloor(1)
                 .build();
 
-        given(roomRepository.findByRoomNumber(newRoomNumber))
+        given(this.roomRepository.findByRoomNumber(newRoomNumber))
                 .willReturn(Optional.of(Room.builder().build()));
 
         //when
         //then
         assertThrows(IllegalArgumentException.class,
-                () -> roomValidator.checkUniqueRoom(room)
+                () -> this.roomValidator.checkUniqueRoom(room)
         );
     }
 

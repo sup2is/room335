@@ -2,7 +2,7 @@ package me.sup2is.room335.api.member;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberValidatorTest {
 

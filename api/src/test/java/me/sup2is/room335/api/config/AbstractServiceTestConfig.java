@@ -1,7 +1,5 @@
 package me.sup2is.room335.api.config;
 
-import lombok.RequiredArgsConstructor;
-import me.sup2is.room335.api.member.MemberService;
 import me.sup2is.room335.domain.member.MemberRepository;
 import me.sup2is.room335.domain.room.RoomRepository;
 import org.springframework.boot.test.context.SpringBootTest;

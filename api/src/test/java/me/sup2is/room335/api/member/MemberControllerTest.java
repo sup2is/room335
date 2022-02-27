@@ -15,7 +15,6 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,7 +27,7 @@ class MemberControllerTest extends AbstractControllerTestConfig {
     @Test
     void 멤버_생성() throws Exception {
         //given
-        MemberCreateDto.Request request = MemberCreateDto.Request.builder()
+        final MemberCreateDto.Request request = MemberCreateDto.Request.builder()
                 .username("")
                 .passwordCheck("")
                 .password("")
@@ -37,10 +36,10 @@ class MemberControllerTest extends AbstractControllerTestConfig {
                 .build();
 
         //when
-        ResultActions resultActions = mockMvc.perform(
+        final ResultActions resultActions = this.mockMvc.perform(
                 post(EndPoints.MEMBER_ROOT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request))
+                        .content(this.objectMapper.writeValueAsString(request))
         ).andDo(print());
 
         //then
@@ -53,18 +52,18 @@ class MemberControllerTest extends AbstractControllerTestConfig {
     @Test
     void 멤버_조회() throws Exception {
         //given
-        Member member = Member.builder()
+        final Member member = Member.builder()
                 .email("")
                 .username("")
                 .mobilePhone("")
                 .password("")
                 .build();
 
-        given(memberService.getMember(anyLong()))
+        given(this.memberService.getMember(anyLong()))
                 .willReturn(MemberDto.Response.of(member));
 
         //when
-        ResultActions resultActions = mockMvc.perform(
+        final ResultActions resultActions = this.mockMvc.perform(
                 get(EndPoints.MEMBER_GET, 1L)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andDo(print());

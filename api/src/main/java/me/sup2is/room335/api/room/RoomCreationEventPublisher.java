@@ -6,7 +6,6 @@ import me.sup2is.room335.api.room.dto.RoomCreateDto;
 import me.sup2is.room335.api.room.dto.RoomCreationMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @RequiredArgsConstructor
@@ -15,9 +14,9 @@ public class RoomCreationEventPublisher {
     private final KafkaTopicProperties kafkaTopicProperties;
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void publishRoomCreationEvent(Long roomId, RoomCreateDto.Request request) {
+    public void publishRoomCreationEvent(final Long roomId, final RoomCreateDto.Request request) {
 
-        kafkaTemplate.send(kafkaTopicProperties.getRoomCreation(),
+        this.kafkaTemplate.send(this.kafkaTopicProperties.getRoomCreation(),
                 RoomCreationMessage.builder()
                         .roomNumber(request.getRoomNumber())
                         .roomFloor(request.getRoomFloor())

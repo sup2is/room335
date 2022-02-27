@@ -14,13 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
@@ -46,39 +44,39 @@ class OrderServiceTest {
     @Test
     void 주문_생성() {
         //given
-        long roomId = 1L;
-        long memberId = 2L;
-        OrderCreateDto.Request request = OrderCreateDto.Request
+        final long roomId = 1L;
+        final long memberId = 2L;
+        final OrderCreateDto.Request request = OrderCreateDto.Request
                 .builder()
-                .fromDate(LocalDate.of(2022,1,1))
-                .toDate(LocalDate.of(2022,1,3))
+                .fromDate(LocalDate.of(2022, 1, 1))
+                .toDate(LocalDate.of(2022, 1, 3))
                 .roomId(roomId)
                 .memberId(memberId)
                 .build();
 
-        given(roomRepository.findById(1L))
+        given(this.roomRepository.findById(1L))
                 .willReturn(Optional.of(Room.builder()
                         .price(Money.wons(100))
                         .build())
                 );
 
-        given(memberRepository.findById(memberId))
+        given(this.memberRepository.findById(memberId))
                 .willReturn(Optional.of(Member.builder().build()));
 
         //when
-        Order order = orderService.createOrder(request);
+        final Order order = this.orderService.createOrder(request);
 
         //then
         assertThat(order.getTotalPrice()).isEqualTo(Money.wons(200));
 
-        then(orderRepository).should().save(any(Order.class));
+        then(this.orderRepository).should().save(any(Order.class));
     }
 
     @Test
     void 주문_조회() {
         //given
-        long orderId = 1L;
-        Order order = Order.builder()
+        final long orderId = 1L;
+        final Order order = Order.builder()
                 .memberId(1L)
                 .roomId(2L)
                 .fromDate(LocalDate.of(2022, 1, 3))
@@ -86,11 +84,11 @@ class OrderServiceTest {
                 .totalPrice(Money.wons(1000))
                 .build();
 
-        given(orderRepository.findById(orderId))
+        given(this.orderRepository.findById(orderId))
                 .willReturn(Optional.of(order));
 
         //when
-        OrderDto.Response response = orderService.getOrder(orderId);
+        final OrderDto.Response response = this.orderService.getOrder(orderId);
 
         //then
         assertThat(response.getFromDate()).isEqualTo(order.getFromDate());

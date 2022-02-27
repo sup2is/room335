@@ -17,7 +17,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
@@ -39,7 +38,7 @@ class RoomServiceTest {
     @Test
     void 객실_생성() {
         //given
-        RoomCreateDto.Request request = RoomCreateDto.Request.builder()
+        final RoomCreateDto.Request request = RoomCreateDto.Request.builder()
                 .roomFloor(1)
                 .roomName("roomName")
                 .roomNumber("roomNumber")
@@ -48,20 +47,20 @@ class RoomServiceTest {
                 .build();
 
         //when
-        roomService.createRoom(request);
+        this.roomService.createRoom(request);
 
         //then
-        then(roomRepository).should().save(any());
-        then(roomValidator).should().checkUniqueRoom(any());
-        then(roomCreationEventPublisher).should().publishRoomCreationEvent(null, request);
+        then(this.roomRepository).should().save(any());
+        then(this.roomValidator).should().checkUniqueRoom(any());
+        then(this.roomCreationEventPublisher).should().publishRoomCreationEvent(null, request);
     }
 
     @Test
     void 객실_조회() {
         //given
-        long roomId = 1L;
+        final long roomId = 1L;
 
-        Room room = Room.builder()
+        final Room room = Room.builder()
                 .roomImages(List.of())
                 .description("description")
                 .roomType(RoomType.SINGLE_BED_ROOM)
@@ -70,11 +69,11 @@ class RoomServiceTest {
                 .roomNumber("roomNumber")
                 .build();
 
-        given(roomRepository.findById(roomId))
+        given(this.roomRepository.findById(roomId))
                 .willReturn(Optional.of(room));
 
         //when
-        RoomDto.Response response = roomService.getRoom(roomId);
+        final RoomDto.Response response = this.roomService.getRoom(roomId);
 
         //then
         assertThat(response.getRoomImages()).isEqualTo(room.getRoomImages());

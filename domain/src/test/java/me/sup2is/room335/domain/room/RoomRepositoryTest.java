@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestConstructor;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -19,17 +17,17 @@ class RoomRepositoryTest {
     @Test
     void 객실_생성() {
         //given
-        RoomImage roomImage1 = RoomImage.builder()
+        final RoomImage roomImage1 = RoomImage.builder()
                 .roomImageUrl("url1")
                 .isMain(true)
                 .build();
 
-        RoomImage roomImage2 = RoomImage.builder()
+        final RoomImage roomImage2 = RoomImage.builder()
                 .roomImageUrl("url2")
                 .isMain(false)
                 .build();
 
-        Room room = Room.builder()
+        final Room room = Room.builder()
                 .roomFloor(1)
                 .roomName("")
                 .roomType(RoomType.SINGLE_BED_ROOM)
@@ -40,27 +38,27 @@ class RoomRepositoryTest {
         room.addRoomImages(roomImage2);
 
         //when
-        roomRepository.save(room);
+        this.roomRepository.save(room);
 
         //then
-        Room findRoom = roomRepository.findById(room.getId()).get();
+        final Room findRoom = this.roomRepository.findById(room.getId()).get();
         assertThat(room).isEqualTo(findRoom);
     }
 
     @Test
     void roomNumber로_객실_조회() {
         //given
-        Room room = Room.builder()
+        final Room room = Room.builder()
                 .roomNumber("roomNumber")
                 .roomType(RoomType.SINGLE_BED_ROOM)
                 .roomName("roomName")
                 .roomFloor(1)
                 .build();
 
-        roomRepository.save(room);
+        this.roomRepository.save(room);
 
         //when
-        Room findRoom = roomRepository.findByRoomNumber(room.getRoomNumber()).get();
+        final Room findRoom = this.roomRepository.findByRoomNumber(room.getRoomNumber()).get();
 
         //then
         assertThat(room).isEqualTo(findRoom);
