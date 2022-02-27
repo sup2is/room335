@@ -3,6 +3,7 @@ package me.sup2is.room335.worker.roomcreation.consumer;
 import lombok.*;
 import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.RoomType;
+import me.sup2is.room335.redis.domain.room.RoomCache;
 
 @Getter
 @Setter
@@ -18,5 +19,16 @@ public class RoomCreationMessage {
     private Integer roomFloor;
     private RoomType roomType;
     private Money price;
+
+    public RoomCache toCache() {
+        return RoomCache.builder()
+                .id(roomId)
+                .roomFloor(roomFloor)
+                .roomType(roomType.name())
+                .roomName(roomName)
+                .roomNumber(roomNumber)
+                .price(price.getValue())
+                .build();
+    }
 
 }
