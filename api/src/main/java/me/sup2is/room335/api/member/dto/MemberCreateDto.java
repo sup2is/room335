@@ -4,16 +4,24 @@ import lombok.Builder;
 import lombok.Getter;
 import me.sup2is.room335.domain.member.Member;
 
+import javax.validation.constraints.NotNull;
+
 public class MemberCreateDto {
 
     @Builder
     @Getter
     public static class Request {
-        private String email;
-        private String username;
-        private String mobilePhone;
-        private String password;
-        private String passwordCheck;
+
+        @NotNull
+        private final String email;
+        @NotNull
+        private final String username;
+        @NotNull
+        private final String mobilePhone;
+        @NotNull
+        private final String password;
+        @NotNull
+        private final String passwordCheck;
 
         public Member toEntity() {
             return Member.builder()

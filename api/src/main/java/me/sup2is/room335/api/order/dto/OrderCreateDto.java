@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import me.sup2is.room335.domain.order.Order;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class OrderCreateDto {
@@ -12,17 +13,21 @@ public class OrderCreateDto {
     @Getter
     public static class Request {
 
-        private Long roomId;
-        private Long memberId;
-        private LocalDate fromDate;
-        private LocalDate toDate;
+        @NotNull
+        private final Long roomId;
+        @NotNull
+        private final Long memberId;
+        @NotNull
+        private final LocalDate fromDate;
+        @NotNull
+        private final LocalDate toDate;
 
         public Order toEntity() {
             return Order.builder()
-                    .fromDate(fromDate)
-                    .toDate(toDate)
-                    .roomId(roomId)
-                    .memberId(memberId)
+                    .fromDate(this.fromDate)
+                    .toDate(this.toDate)
+                    .roomId(this.roomId)
+                    .memberId(this.memberId)
                     .build();
         }
     }

@@ -8,6 +8,8 @@ import me.sup2is.room335.domain.model.Money;
 import me.sup2is.room335.domain.room.Room;
 import me.sup2is.room335.domain.room.RoomType;
 
+import javax.validation.constraints.NotNull;
+
 public class RoomCreateDto {
 
     @Builder
@@ -16,10 +18,15 @@ public class RoomCreateDto {
     @NoArgsConstructor
     public static class Request {
 
+        @NotNull
         private String roomName;
+        @NotNull
         private String roomNumber;
+        @NotNull
         private Integer roomFloor;
+        @NotNull
         private RoomType roomType;
+        @NotNull
         private Money price;
 
         public Room toEntity() {
