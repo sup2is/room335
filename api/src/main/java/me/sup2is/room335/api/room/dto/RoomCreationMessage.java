@@ -12,6 +12,7 @@ public class RoomCreationMessage {
     private final Long roomId;
     private final String roomName;
     private final String roomNumber;
+    private final String description;
     private final Integer roomFloor;
     private final RoomType roomType;
     private final Money price;

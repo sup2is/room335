@@ -27,6 +27,8 @@ public class RoomCreateDto {
         @NotNull
         private RoomType roomType;
         @NotNull
+        private String description;
+        @NotNull
         private Money price;
 
         public Room toEntity() {
@@ -35,6 +37,7 @@ public class RoomCreateDto {
                     .roomName(this.roomName)
                     .roomNumber(this.roomNumber)
                     .roomType(this.roomType)
+                    .description(this.description)
                     .price(this.price)
                     .build();
         }

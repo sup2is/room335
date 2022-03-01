@@ -37,6 +37,7 @@ class RoomControllerTest extends AbstractControllerTestConfig {
                 .roomNumber("roomNumber")
                 .roomName("roomName")
                 .roomFloor(1)
+                .description("description")
                 .price(Money.wons(10000))
                 .build();
 

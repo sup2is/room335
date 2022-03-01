@@ -16,6 +16,7 @@ public class RoomCreationMessage {
     private Long roomId;
     private String roomName;
     private String roomNumber;
+    private String description;
     private Integer roomFloor;
     private RoomType roomType;
     private Money price;
@@ -27,6 +28,7 @@ public class RoomCreationMessage {
                 .roomType(roomType.name())
                 .roomName(roomName)
                 .roomNumber(roomNumber)
+                .description(description)
                 .price(price.getValue())
                 .build();
     }
