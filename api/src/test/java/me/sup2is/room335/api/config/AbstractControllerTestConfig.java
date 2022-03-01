@@ -3,7 +3,8 @@ package me.sup2is.room335.api.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.sup2is.room335.api.member.MemberService;
 import me.sup2is.room335.api.order.OrderService;
-import me.sup2is.room335.api.room.RoomService;
+import me.sup2is.room335.api.room.RoomCommandService;
+import me.sup2is.room335.api.room.RoomQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,7 +29,10 @@ public class AbstractControllerTestConfig {
     protected MemberService memberService;
 
     @MockBean
-    protected RoomService roomService;
+    protected RoomCommandService roomCommandService;
+
+    @MockBean
+    protected RoomQueryService roomQueryService;
 
     @MockBean
     protected OrderService orderService;

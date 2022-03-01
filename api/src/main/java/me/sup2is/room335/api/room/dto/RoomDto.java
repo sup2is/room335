@@ -3,12 +3,8 @@ package me.sup2is.room335.api.room.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import me.sup2is.room335.domain.room.Room;
-import me.sup2is.room335.domain.room.RoomImage;
 import me.sup2is.room335.domain.room.RoomType;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import me.sup2is.room335.redis.domain.room.RoomCache;
 
 public class RoomDto {
 
@@ -16,25 +12,19 @@ public class RoomDto {
     @Getter
     @EqualsAndHashCode
     public static class Response {
-        private String roomName;
-        private String roomNumber;
-        private Integer roomFloor;
-        private RoomType roomType;
-        private String description;
-        private List<String> roomImages;
+        private final String roomName;
+        private final String roomNumber;
+        private final Integer roomFloor;
+        private final RoomType roomType;
+        private final String description;
 
-        public static Response of(final Room room) {
+        public static Response of(final RoomCache room) {
             return Response.builder()
                     .roomFloor(room.getRoomFloor())
                     .roomName(room.getRoomName())
-                    .roomType(room.getRoomType())
+                    .roomType(RoomType.valueOf(room.getRoomType()))
                     .roomNumber(room.getRoomNumber())
                     .description(room.getDescription())
-                    .roomImages(room.getRoomImages()
-                            .stream()
-                            .map(RoomImage::getRoomImageUrl)
-                            .collect(Collectors.toList())
-                    )
                     .build();
         }
     }

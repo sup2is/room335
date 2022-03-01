@@ -12,16 +12,17 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class RoomController {
 
-    private final RoomService roomService;
+    private final RoomCommandService roomCommandService;
+    private final RoomQueryService roomQueryService;
 
     @PostMapping(EndPoints.ROOM_ROOT)
     public void createRoom(@Valid @RequestBody final RoomCreateDto.Request request) {
-        this.roomService.createRoom(request);
+        roomCommandService.createRoom(request);
     }
 
     @GetMapping(EndPoints.ROOM_GET)
     public RoomDto.Response getRoom(@PathVariable("roomId") final Long roomId) {
-        return this.roomService.getRoom(roomId);
+        return roomQueryService.getRoom(roomId);
     }
 
 }
