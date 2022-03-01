@@ -2,6 +2,7 @@ package me.sup2is.room335.api.room;
 
 import lombok.RequiredArgsConstructor;
 import me.sup2is.room335.api.room.dto.RoomCreateDto;
+import me.sup2is.room335.api.util.TransactionUtil;
 import me.sup2is.room335.domain.room.Room;
 import me.sup2is.room335.domain.room.RoomRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,9 @@ public class RoomCommandService {
 
         roomRepository.save(room);
 
-        roomCreationEventPublisher.publishRoomCreationEvent(room.getId(), request);
+        TransactionUtil.runAfterCommitTransaction(
+                () -> roomCreationEventPublisher.publishRoomCreationEvent(room.getId(), request)
+        );
     }
 
 }
