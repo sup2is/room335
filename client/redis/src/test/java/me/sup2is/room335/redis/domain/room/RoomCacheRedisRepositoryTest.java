@@ -1,8 +1,6 @@
-package me.sup2is.room335.redis.domain;
+package me.sup2is.room335.redis.domain.room;
 
 import lombok.RequiredArgsConstructor;
-import me.sup2is.room335.redis.domain.room.RoomCache;
-import me.sup2is.room335.redis.domain.room.RoomRedisRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestConstructor;
@@ -23,7 +21,7 @@ class RoomCacheRedisRepositoryTest {
     @Test
     void 객실_생성_for_redis() {
         //given
-        RoomCache roomCache = RoomCache.builder()
+        final RoomCache roomCache = RoomCache.builder()
                 .id(1L)
                 .roomFloor(1)
                 .roomName("roomName")
@@ -37,7 +35,7 @@ class RoomCacheRedisRepositoryTest {
                 .build();
 
         //when
-        RoomCache saved = roomRedisRepository.save(roomCache);
+        final RoomCache saved = roomRedisRepository.save(roomCache);
 
         //then
         assertThat(saved).isNotNull();
